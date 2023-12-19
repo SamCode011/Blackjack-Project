@@ -12,6 +12,10 @@ let scorePlayer = 0,
     scoreComputer = 0;
 //event-click
 const btnnewgm =document.querySelector('#btnnewgm');
+const btnhit =document.querySelector('#btnhit');
+const btnstand =document.querySelector('#btnstand');
+const divPlayerCards =document.querySelector('#player-cards');
+const divComputerCards =document.querySelector('#computer-cards')
 const scoreHTML =document.querySelectorAll('small');
 //creating new deck
 const crearDeck = () => {
@@ -60,10 +64,57 @@ const valueCard = (card) => {
 const value = valueCard(hit()) ;
 console.log({value})
 
+//*Turn-computer
+
+const turnComputer = (scoreMin) => {
+    do {
+        const card = hit();
+        scoreComputer = scoreComputer + valueCard (card) ;
+        scoreHTML[1].innerText = scoreComputer ;
+
+        const imgCard =document.createElement('img');
+    imgCard.src =`./cartas/${ card }.png`;
+    imgCard.classList.add('card');
+    divComputerCards.append(imgCard);
+    if (scoreMin > 21){
+        break ;
+    }
+    }while((scoreComputer < scoreMin) && (scoreMin <=21))
+
+    if(scoreComputer === scoreMin) {
+        alert('draw')
+    }else if(scoreMin > 21) {
+        alert('win computer')
+    }else if(scoreComputer >21){
+        alert('You Win')
+    }
+}
+
 
 //*Events
-btnnewgm.addEventListener('click', () => {
+btnhit.addEventListener('click', () => {
     const card = hit();
     scorePlayer = scorePlayer + valueCard (card) ;
     scoreHTML[0].innerText = scorePlayer ;
+    //<img class="card" src="./cartas/10H.png" >//
+
+    const imgCard =document.createElement('img');
+    imgCard.src =`./cartas/${ card }.png`;
+    imgCard.classList.add('card');
+    divPlayerCards.append(imgCard);
+
+    if(scorePlayer > 21) {
+        console.warn('GAME OVER');
+        btnhit.disabled =true ;
+    }else if (scorePlayer === 21 ) {
+        console.warn('YOU WIN')
+    }
+
 })
+btnstand.addEventListener('click',() => {
+    btnhit.disabled =true ;
+    btnstand.disabled =true ;
+
+})
+console.log(21);
+turnComputer(21) ;
