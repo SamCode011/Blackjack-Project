@@ -7,8 +7,12 @@
 let deck = [];
 const types = ['C', 'D', 'H', 'S'];
 const special = []
+//scores
+let scorePlayer = 0,
+    scoreComputer = 0;
 //event-click
-const btnnewgm =document.querySelector('#btn-newgm');
+const btnnewgm =document.querySelector('#btnnewgm');
+const scoreHTML =document.querySelectorAll('small');
 //creating new deck
 const crearDeck = () => {
     for (let i = 2; i <= 10; i++) {
@@ -59,5 +63,7 @@ console.log({value})
 
 //*Events
 btnnewgm.addEventListener('click', () => {
-    
+    const card = hit();
+    scorePlayer = scorePlayer + valueCard (card) ;
+    scoreHTML[0].innerText = scorePlayer ;
 })
