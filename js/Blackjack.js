@@ -64,6 +64,8 @@ const valueCard = (card) => {
 const value = valueCard(hit()) ;
 console.log({value})
 
+//*Add Sound
+
 //*Turn-computer
 
 const turnComputer = (scoreMin) => {
@@ -81,13 +83,21 @@ const turnComputer = (scoreMin) => {
     }
     }while((scoreComputer < scoreMin) && (scoreMin <=21))
 
-    if(scoreComputer === scoreMin) {
-        alert('draw')
-    }else if(scoreMin > 21) {
-        alert('win computer')
-    }else if(scoreComputer >21){
-        alert('You Win')
-    }
+
+    setTimeout(() => {
+        if(scoreComputer === scoreMin) {
+            alert('draw')
+        }else if(scoreMin > 21) {
+            alert('win computer')
+           
+        }else if(scoreComputer >21){
+            alert('You Win')
+        
+        }else{
+            alert('win computer')
+        }
+
+    },100);
 }
 
 
@@ -106,6 +116,7 @@ btnhit.addEventListener('click', () => {
     if(scorePlayer > 21) {
         console.warn('GAME OVER');
         btnhit.disabled =true ;
+        btnstand.disabled =true;
     }else if (scorePlayer === 21 ) {
         console.warn('YOU WIN')
     }
@@ -115,6 +126,21 @@ btnstand.addEventListener('click',() => {
     btnhit.disabled =true ;
     btnstand.disabled =true ;
 
+    turnComputer(scorePlayer);
+
+});
+btnnewgm.addEventListener('click', () => {
+    console.clear() ;
+    deck= [];
+    deck =crearDeck();
+    scorePlayer   = 0;
+    scoreComputer = 0; 
+
+    scoreHTML[0].innerText = 0 ;
+    scoreHTML[0].innerText = 0 ;
+    divComputerCards.innerHTML='';
+    divPlayerCards.innerHTML='' ;
+
+    btnhit.disabled=false ;
+    btnstand.disabled=false;
 })
-console.log(21);
-turnComputer(21) ;
