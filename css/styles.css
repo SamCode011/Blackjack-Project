@@ -21,3 +21,7 @@ html,body {
     height :240px;
 
 }
+.right {
+    display: flex;
+    margin-right : 20px;
+}
